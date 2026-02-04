@@ -1,0 +1,71 @@
+React e nadvoresna biblioteka koja koristi root-container za da gi drzi organizirani elementite, 
+upravuva samo so elementi vo kontejnerot.
+render - sto da pojavi na display vo kontejnerot
+Babel - preveduva od jsx vo vanilla js 
+JSX - js xml - moze html kod da pisuvame direktno vo javascript kod
+Component e samo del od web sajt ,ni ovozmozuva da pravime svoi html elementi,
+ime na komponenta mora da pocnuva so golema bukva
+<input /> - self closing element
+component syntax - {ChatInput()} or <ChatInput></ChatInput>
+fragment - <> elements </> - za grupiranje na povekje elementi
+const {sender,message} =props; - shortcut za da zeme prop i da gi napravi const avtomatski
+function ChatMessage({sender,message}) - uste eden shortcut , uste se vika i destructuring
+guard operator -> const result= val1 && val2; ako val1=true result=val2
+primer   {sender === 'user' &&  <img src="user.png" width="50"/>} 
+event handlers - run a function when we interact with the website
+<button onClick={sendMessage}> Send message</button> - {} ni ovozmozuva da cuvame funkcija ili bilo koja
+vrednost vo prop
+State- data that is connected to the HTML
+React.useState() - prima niza objekti primer i vrakja niza so sto prv element e inicijalna sostojba na 
+vnesenata niza a vtor element e funkcija koja ja apdejtira taa niza
+vo React pozelno e da pravime copy od original data i da pravime update na toa copy za da bide efficient
+crypto.randomUUID() - generira random id
+const [chatMessages,setChatMessages]=array; - destructuring, gi zema od array objekti vo zagrada i kreira niza
+in REACT do not use the DOM manually
+Lifting the state up - share state between multiple components
+State is updated after all of the code is finished
+Hooks- insert REACT features into our component
+hooks se stavaat na vrv na komponenta , nikako vo if ili funkcija..
+React.useEffect(()=>{},[chatMessages]); -dependency aarray
+const chatMessagesRef=React.useRef(null); i posle vo component tag ref={chatMessagesRef} - za da ne
+pristapuvame direktno do DOM vo REACT koristime hooks
+hook funkcii mora da pocnuvaat so use pr. useAutoScroll
+
+vo terminal
+node - run js code outside browser
+linter - tool that checks your code for errors
+Vite - tool to set up- build the project and creates a server
+Vite - ovozmozuva import na bilo kakov tip file
+export default ChatMessages; - eof , default export koga sakame da export edno nesto od file           
+npm run - kazuva pc da gleda vo package.json i da bara sekcija scripts
+dev- gledaj vo scripts i najdi prop dev i run negova vrednost
+fazi na sekoja komponenta , se hendla so useEffect()
+1. mounting - dodadena vo DOM
+2. updating - izmeneta
+3. unmounting - izbrisana od DOM
+useState() -> set and update the state
+useEffect() -> perform side effects in lifecycle
+
+repository - folder where git is tracking changes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 				

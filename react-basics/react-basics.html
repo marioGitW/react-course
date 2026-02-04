@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+     <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+      // const button = <button>JSX button</button>;
+      // const paragraph=<p> JSX Paragraph</p>
+      // const div = (
+      //   <div>
+      //       <h1> React Heading</h1>
+      //       <p> JSX Paragraph {2+2}</p>
+      //       <button>JSX button</button>
+      //   </div>
+      // )
+      // const container = document.querySelector('.js-container');
+      // ReactDOM.createRoot(container).render(div);
+
+        const div=<div>Current time is: {dayjs().format('HH:mm:ss')}</div>
+        const container =document.querySelector('.js-container')
+        const root = ReactDOM.createRoot(container)
+        root.render(div)
+        setInterval(()=>{
+              const div=<div>Current time is: {dayjs().format('HH:mm:ss')}</div>
+              root.render(div)
+        },1000)
+    </script>
+  </body>
+</html>

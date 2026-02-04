@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exercise 4</title>
+    <style>
+        .on-button {
+            background-color: rgb(25, 135, 84);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .off-button {
+            background-color: rgb(220, 53, 69);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+         body {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .counter-button {
+        background-color: rgb(25, 135, 84);
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      .counter-container {
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        background-color: rgb(200, 200, 200);
+        align-items: center;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+    <script type="text/babel">
+        function App() {
+            const [buttonState, setButtonState] = React.useState(true)
+            const [showPassword, setShowPassword] = React.useState(false)
+            const [time, setTime] = React.useState(dayjs().format('HH:mm:ss'))
+            const [count, setCount] = React.useState(0);
+            const buttonRef = React.useRef(null);
+            function increaseCount() {
+                setCount(count + 1);
+            }
+
+            function resetCount() {
+                setCount(0);
+            }
+            function autoClick() {
+                setInterval(() => {
+                    const buttonElem = buttonRef.current;
+                    if (buttonElem) {
+                        buttonElem.click();
+                    }
+                }, 1000);
+            }
+            React.useEffect(() => {
+                setInterval(() => {
+                    // console.log('run code')
+                    setTime(dayjs().format('HH:mm:ss'))
+                }, 1000)
+            }, []);
+            function changeButtonState() {
+                setButtonState(!buttonState)
+            }
+            function changePasswordType() {
+                setShowPassword(!showPassword)
+            }
+            return (
+                <div className="counter-container">
+                    <button className={buttonState ? 'on-button' : 'off-button'}
+                        onClick={changePasswordType}>
+                        {buttonState ? 'ON' : 'OFF'}
+                    </button> <br />
+                    <input type={showPassword ? 'text' : 'password'} />
+                    <p>Current time:{time}</p>
+                    <button
+                        onClick={increaseCount}
+                        ref={buttonRef} className="counter-button"
+                    >
+                        Clicked {count} {count === 1 ? 'time' : 'times'}
+                    </button>
+                    <button onClick={resetCount} className="counter-button">
+                        Reset
+                    </button>
+                    <button onClick={autoClick} className="counter-button">
+                        Auto Click
+                    </button>
+
+                </div>
+            );
+        }
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />);
+    </script>
+</body>
+
+</html>
