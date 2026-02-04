@@ -1,6 +1,5 @@
 import './header.css'
 import './HomePage.css'
-import { Link } from 'react-router-dom';
 
 export function HomePage() {
     return (
@@ -9,12 +8,12 @@ export function HomePage() {
         
         <div className="header">
       <div className="left-section">
-        <Link to="/" className="header-link">
+        <a href="/" className="header-link">
           <img className="logo"
             src="images/logo-white.png" />
           <img className="mobile-logo"
             src="images/mobile-logo-white.png" />
-        </Link>
+        </a>
       </div>
 
       <div className="middle-section">
@@ -26,15 +25,16 @@ export function HomePage() {
       </div>
 
       <div className="right-section">
-        <Link className="orders-link header-link" to="/orders">
-          <span className="orders-text">Orders</span>
-        </Link>
+        <a className="orders-link header-link" href="/orders">
 
-        <Link className="cart-link header-link" to="/checkout">
+          <span className="orders-text">Orders</span>
+        </a>
+
+        <a className="cart-link header-link" href="/checkout">
           <img className="cart-icon" src="images/icons/cart-icon.png" />
           <div className="cart-quantity">3</div>
           <div className="cart-text">Cart</div>
-        </Link>
+        </a>
       </div>
     </div>
 
