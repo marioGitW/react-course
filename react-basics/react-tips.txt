@@ -46,6 +46,8 @@ fazi na sekoja komponenta , se hendla so useEffect()
 useState() -> set and update the state
 useEffect() -> perform side effects in lifecycle
 
+Routing- ni ovozmozuva kreiranje povekje web strani vo React koristejki edna html strana
+
 repository - folder where git is tracking changes
 
 
