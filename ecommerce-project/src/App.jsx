@@ -1,22 +1,16 @@
 // import { useState } from 'react'
-import { Routes,Route } from 'react-router'
+import { Routes,Route } from 'react-router-dom'
+import { HomePage } from './pages/HomePage.jsx'
+import { CheckoutPage } from './pages/CheckoutPage.jsx'
 import './App.css'
-import { HomePage } from './pages/HomePage'
 
 function App() {
 
   return (
-    <>
       <Routes>
-        {/* index= path="/" */}
-        <Route index element={<HomePage/>}/>
-        {/* <Route path="/checkout" element={<CheckoutPage/>}/>
-        <Route path="/tracking" element={<TrackingPage/>}/> */}
-        <Route path="/checkout" element={<div>Test checkout page</div>}/>
-
+        <Route index element={<HomePage />}/>
+        <Route path="checkout" element={<CheckoutPage/>}/>
       </Routes>
-      
-    </>
   )
 }
 
