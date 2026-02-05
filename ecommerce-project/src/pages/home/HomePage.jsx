@@ -1,32 +1,42 @@
 import { Header } from '../../components/Header';
 import './HomePage.css'
-import {products} from '../../../starting-code/data/products'
+import { products } from '../../../starting-code/data/products'
 import CheckmarkIcon from '../../assets/images/icons/checkmark.png';
+
+
 export function HomePage() {
-    return (
-        <>
-        <link rel="icon" type="image/svg+xml" href="home-favicon.png" />
-        <title>Ecommerce Project</title>
-        
+
+  fetch('http://localhost:3000/api/products')
+    .then((response) => {
+      response.json()
+    }).then((data) => {
+      console.log(data)
+    });
+
+  return (
+    <>
+      <link rel="icon" type="image/svg+xml" href="home-favicon.png" />
+      <title>Ecommerce Project</title>
+
       <Header />
-    <div className="home-page">
-      <div className="products-grid">
-        {products.map((product)=>{
-            return(
+      <div className="home-page">
+        <div className="products-grid">
+          {products.map((product) => {
+            return (
               <>
-                  <div key={product.id} className="product-container">
+                <div key={product.id} className="product-container">
                   <div className="product-image-container">
                     <img className="product-image"
                       src={product.image} />
                   </div>
 
                   <div className="product-name limit-text-to-2-lines">
-                   {product.name}
+                    {product.name}
                   </div>
 
                   <div className="product-rating-container">
                     <img className="product-rating-stars"
-                      src={`images/ratings/rating-${product.rating.stars*10}.png`} />
+                      src={`images/ratings/rating-${product.rating.stars * 10}.png`} />
                     <div className="product-rating-count link-primary">
                       {product.rating.count}
                     </div>
@@ -62,12 +72,12 @@ export function HomePage() {
                     Add to Cart
                   </button>
                 </div>
-                </>
+              </>
             );
-        })}
-      
+          })}
+
+        </div>
       </div>
-    </div>
     </>
-    );
+  );
 }
