@@ -1,7 +1,7 @@
 import { DeliveryDate } from './DeliveryDate.jsx'
 import { formatMoney } from '../../utils/money.js'
 import { DeliveryOptions } from './DeliveryOptions.jsx'
-export function OrderSummary({ deliveryOption, cart }) {
+export function OrderSummary({ deliveryOption, cart,loadCart }) {
     return(
         <div className="order-summary">
                         {deliveryOption.length > 0 && cart.map((cartItem) => {
@@ -43,7 +43,7 @@ export function OrderSummary({ deliveryOption, cart }) {
                                                 </span>
                                             </div>
                                         </div>
-                                        <DeliveryOptions deliveryOptions={deliveryOption} cartItem={cartItem}/>   
+                                        <DeliveryOptions deliveryOption={deliveryOption} cartItem={cartItem} loadCart={loadCart}/>   
                                     </div>
                                 </div>
                             )
