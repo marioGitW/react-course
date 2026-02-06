@@ -9,4 +9,10 @@ describe('formatMoney', () => {
         expect(formatMoney(2000)).toBe('$20.00')
         expect(formatMoney(100)).toBe('$1.00')
     })
+    it('test zero cents', () => {
+        expect(formatMoney(0)).toBe('$0.00')
+    })
+    it('test negative cents', () => {
+        expect(formatMoney(-500)).toBe('-$5.00')
+    })
 })
