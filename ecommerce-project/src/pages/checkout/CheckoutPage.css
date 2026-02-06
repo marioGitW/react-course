@@ -75,7 +75,9 @@
   margin-top: 5px;
   margin-bottom: 22px;
 }
-
+.quantity-textbox {
+  width: 50px;
+}
 .checkout-page .cart-item-details-grid {
   display: grid;
   /* 100px 1fr 1fr; means the 2nd and 3rd column will

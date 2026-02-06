@@ -1,28 +1,93 @@
-import BuyAgainIcon from '../../assets/images/icons/buy-again.png';
-import dayjs from 'dayjs';
+import axios from 'axios'
+import { formatMoney } from '../../utils/money.js'
+import { useEffect, useState } from 'react'
 
-export function CartItemDetails({ orderProduct }) {
-    return(
+export function CartItemDetails({ cartItem, loadCart }) {
+    const [isUpdatingQuantity, setIsUpdatingQuantity] = useState(false)
+    const [quantity, setQuantity] = useState(0)
+
+    // Sync quantity when cartItem loads/changes
+    useEffect(() => {
+        if (cartItem) {
+            setQuantity(cartItem.quantity)
+        }
+    }, [cartItem])
+
+    if (!cartItem) return null
+
+    const deleteCartItem = async () => {
+        await axios.delete(`/api/cart-items/${cartItem.productId}`)
+        await loadCart()
+    }
+
+    const updateQuantity = async () => {
+        if (isUpdatingQuantity) {
+            await axios.put(`/api/cart-items/${cartItem.productId}`, {
+                quantity: Number(quantity),
+            })
+            await loadCart()
+            setIsUpdatingQuantity(false)
+        } else {
+            setIsUpdatingQuantity(true)
+        }
+    }
+
+    const inputKeyDownFunction = (e) => {
+        if (e.key === 'Enter') updateQuantity()
+        if (e.key === 'Escape') {
+            setQuantity(cartItem.quantity)
+            setIsUpdatingQuantity(false)
+        }
+    }
+
+    return (
         <>
-    <div className="product-image-container">
-                        <img src={orderProduct.product.image} />
-                    </div>
+            <img
+                className="product-image"
+                src={cartItem.product.image}
+            />
 
-                    <div className="product-details">
-                        <div className="product-name">
-                            {orderProduct.product.name}
-                        </div>
-                        <div className="product-delivery-date">
-                            Arriving on: {dayjs(orderProduct.estimatedDeliveryTimeMs).add(7, 'day').format('MMMM D')}
-                        </div>
-                        <div className="product-quantity">
-                            Quantity: {orderProduct.product.quantity}
-                        </div>
-                        <button className="buy-again-button button-primary">
-                            <img className="buy-again-icon" src={BuyAgainIcon} />
-                            <span className="buy-again-message">Add to Cart</span>
-                        </button>
-                    </div>
+            <div className="cart-item-details">
+                <div className="product-name">
+                    {cartItem.product.name}
+                </div>
+
+                <div className="product-price">
+                    {formatMoney(cartItem.product.priceCents)}
+                </div>
+
+                <div className="product-quantity">
+                    <span>
+                        Quantity:{' '}
+                        {isUpdatingQuantity ? (
+                            <input
+                                className="quantity-textbox"
+                                value={quantity}
+                                onChange={(e) => setQuantity(e.target.value)}
+                                onKeyDown={inputKeyDownFunction}
+                            />
+                        ) : (
+                            <span className="quantity-label">
+                                {cartItem.quantity}
+                            </span>
+                        )}
+                    </span>
+
+                    <span
+                        className="update-quantity-link link-primary"
+                        onClick={updateQuantity}
+                    >
+                        Update
+                    </span>
+
+                    <span
+                        className="delete-quantity-link link-primary"
+                        onClick={deleteCartItem}
+                    >
+                        Delete
+                    </span>
+                </div>
+            </div>
         </>
     )
 }

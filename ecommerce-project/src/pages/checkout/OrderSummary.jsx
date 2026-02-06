@@ -1,59 +1,25 @@
 import { DeliveryDate } from './DeliveryDate.jsx'
-import { formatMoney } from '../../utils/money.js'
 import { DeliveryOptions } from './DeliveryOptions.jsx'
-import axios from 'axios'
-export function OrderSummary({ deliveryOption, cart,loadCart }) {
-    return(
+import { CartItemDetails } from '../orders/CartItemDetails.jsx'
+export function OrderSummary({ deliveryOption, cart, loadCart }) {
+
+    return (
         <div className="order-summary">
-                        {deliveryOption.length > 0 && cart.map((cartItem) => {
-                            const deleteCartItem = async () => {
-                                await axios.delete(`/api/cart-items/${cartItem.productId}`)
-                                await loadCart()
-                            }
-                                
-                            return (
-                                <div
-                                    key={cartItem.productId}
-                                    className="cart-item-container"
-                                >
-                                    <DeliveryDate cartItem={cartItem} deliveryOptions={deliveryOption}/>
+            {deliveryOption.length > 0 && cart.map((cartItem) => {
+                
+                return (
+                    <div
+                        key={cartItem.productId}
+                        className="cart-item-container" >
+                        <DeliveryDate cartItem={cartItem} deliveryOptions={deliveryOption} />
 
-                                    <div className="cart-item-details-grid">
-                                        <img
-                                            className="product-image"
-                                            src={cartItem.product.image}
-                                        />
-
-                                        <div className="cart-item-details">
-                                            <div className="product-name">
-                                                {cartItem.product.name}
-                                            </div>
-
-                                            <div className="product-price">
-                                                {formatMoney(cartItem.product.priceCents)}
-                                            </div>
-
-                                            <div className="product-quantity">
-                                                <span>
-                                                    Quantity:{' '}
-                                                    <span className="quantity-label">
-                                                        {cartItem.quantity}
-                                                    </span>
-                                                </span>
-                                                <span className="update-quantity-link link-primary">
-                                                    Update
-                                                </span>
-                                                <span className="delete-quantity-link link-primary"
-                                                onClick={deleteCartItem}>
-                                                    Delete
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <DeliveryOptions deliveryOption={deliveryOption} cartItem={cartItem} loadCart={loadCart}/>   
-                                    </div>
-                                </div>
-                            )
-                        })}
+                        <div className="cart-item-details-grid">
+                            <CartItemDetails cartItem={cartItem} loadCart={loadCart} />
+                            <DeliveryOptions deliveryOption={deliveryOption} cartItem={cartItem} loadCart={loadCart} />
+                        </div>
                     </div>
+                )
+            })}
+        </div>
     )
 }
